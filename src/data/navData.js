@@ -1,0 +1,106 @@
+export const navItems = [
+  { label: 'HOME', href: '/' },
+  {
+    label: 'ABOUT US',
+    href: '#',
+    dropdown: [
+      { label: 'About GRCP', href: '/about' },
+      { label: 'PEO', href: '/peo' },
+      { label: 'POs', href: '/pos' },
+    ],
+  },
+  {
+    label: 'ADMINISTRATION',
+    href: '#',
+    dropdown: [
+      { label: 'Chairman', href: '#' },
+      { label: 'Vice President', href: '#' },
+      { label: 'Principal', href: '#' },
+      { label: 'Governing Body', href: '#' },
+      { label: 'IDMC', href: '#' },
+      { label: 'Organizational Chart', href: '#' },
+    ],
+  },
+  {
+    label: 'ADMISSIONS',
+    href: '#',
+    dropdown: [
+      { label: 'Admission Procedure', href: '#' },
+      { label: 'Course Fees', href: '#' },
+      { label: 'EAMCET Last Rank', href: '#' },
+      { label: 'PGECET Last Rank', href: '#' },
+    ],
+  },
+  {
+    label: 'PROGRAMMES',
+    href: '#',
+    dropdown: [
+      { label: 'B.Pharmacy', href: '#' },
+      { label: 'M.Pharmacy – Pharmaceutics', href: '#' },
+      { label: 'M.Pharmacy – Pharmaceutical Analysis', href: '#' },
+      { label: 'M.Pharmacy – Pharmacology', href: '#' },
+      { label: 'PG Program Committee', href: '#' },
+    ],
+  },
+  {
+    label: 'ACADEMICS',
+    href: '#',
+    dropdown: [
+      { label: 'Syllabus – B.Pharmacy', href: '#' },
+      { label: 'Syllabus – M.Pharmacy', href: '#' },
+      { label: 'Academic Calendar', href: '#' },
+      { label: 'Timetables', href: '#' },
+      { label: 'Library Committee', href: '#' },
+      { label: 'Information Center', href: '#' },
+      { label: 'E-Journals', href: '#' },
+      { label: 'Daily News Papers', href: '#' },
+      { label: 'Statistics', href: '#' },
+      { label: 'Title Volumes', href: '#' },
+      { label: 'Faculty', href: '#' },
+      { label: 'Non-Teaching Staff', href: '#' },
+    ],
+  },
+  {
+    label: 'RESEARCH',
+    href: '#',
+    dropdown: [
+      { label: 'Research@GRCP', href: '#' },
+      { label: 'PhD Guideships', href: '#' },
+      { label: 'Publications', href: '#' },
+      { label: 'Patents', href: '#' },
+      { label: 'Sponsored Projects', href: '#' },
+    ],
+  },
+  {
+    label: 'EXAMINATION',
+    href: '#',
+    dropdown: [
+      { label: 'Branch', href: '#' },
+      { label: 'Sessional Timetable', href: '#' },
+      { label: 'OU Timetables', href: '#' },
+      { label: 'Notifications', href: '#' },
+      { label: 'Results', href: '#' },
+      { label: 'Question Papers', href: '#' },
+    ],
+  },
+  {
+    label: 'PLACEMENTS',
+    href: '#',
+    dropdown: [
+      { label: 'Placement Cell', href: '#' },
+      { label: 'Placement Status', href: '#' },
+    ],
+  },
+  {
+    label: 'ALUMNI',
+    href: '#',
+    dropdown: [
+      { label: 'Alumni Registration', href: '#' },
+      { label: 'Executive Members', href: '#' },
+      { label: 'Enrollment', href: '#' },
+      { label: 'List', href: '#' },
+      { label: 'Distinguished Alumni', href: '#' },
+      { label: 'Contribution', href: '#' },
+    ],
+  },
+]
