@@ -41,15 +41,29 @@
 ::-webkit-scrollbar-thumb     { background: #a41425; border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: #8c0f1e; }
 
-/* ── Ticker / Marquee ── */
+/* ── Top announcement bar scroll ── */
+@keyframes announce-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.announce-scroll-track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  animation: announce-scroll 28s linear infinite;
+}
+.announce-scroll-track:hover { animation-play-state: paused; }
+
+/* ── Ticker / Marquee — seamless 2-copy loop ── */
 @keyframes ticker-scroll {
-  0%   { transform: translateX(100%); }
-  100% { transform: translateX(-100%); }
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 .ticker-animate {
-  animation: ticker-scroll 35s linear infinite;
+  display: flex;
+  width: max-content;
+  animation: ticker-scroll 42s linear infinite;
   white-space: nowrap;
-  display: inline-block;
 }
 .ticker-animate:hover { animation-play-state: paused; }
 
@@ -65,6 +79,32 @@
 }
 .logo-scroll-track:hover { animation-play-state: paused; }
 
+/* ── Footer background slide animation (matches grcp.ac.in webstyle.css) ── */
+@keyframes footer-slide {
+  0%   { background-position: 0% center; }
+  50%  { background-position: 1% center; }
+  100% { background-position: 0% center; }
+}
+.footer-main {
+  animation: footer-slide 7s linear infinite;
+}
+
+/* ── Modal animations ── */
+@keyframes modal-overlay-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes modal-box-in {
+  from { opacity: 0; transform: scale(0.93) translateY(12px); }
+  to   { opacity: 1; transform: scale(1)    translateY(0);    }
+}
+.modal-overlay-enter {
+  animation: modal-overlay-in 0.22s ease forwards;
+}
+.modal-box-enter {
+  animation: modal-box-in 0.25s cubic-bezier(0.34, 1.4, 0.64, 1) forwards;
+}
+
 /* ── Hero Carousel ── */
 .hero-slide {
   transition: opacity 0.7s ease-in-out;
@@ -72,32 +112,80 @@
 
 /* ── Nav dropdown ── */
 .nav-item { position: relative; }
+
 .nav-dropdown {
   display: none;
   position: absolute;
   top: 100%;
   left: 0;
   z-index: 9999;
-  min-width: 230px;
-  background: #ffffff;
-  border-top: 3px solid #a41425;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+  min-width: 210px;
+  background: #fff;
+  border-top: 2px solid #a41425;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.18);
 }
 .nav-item:hover > .nav-dropdown,
 .nav-item:focus-within > .nav-dropdown {
   display: block;
 }
-.nav-dropdown a {
-  display: block;
-  padding: 10px 15px;
-  color: #333;
+
+/* Each <li> inside the dropdown needs position:relative for subdropdown anchor */
+.nav-dropdown li { position: relative; }
+
+/* All first-level dropdown links */
+.nav-dropdown > li > a {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 14px;
+  color: #a41425;
   font-size: 12px;
-  font-weight: 400;
+  font-weight: 600;
   text-transform: uppercase;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid #dee2e6;
   white-space: nowrap;
+  text-decoration: none;
 }
-.nav-dropdown a:hover {
+.nav-dropdown > li > a:hover {
+  background: #a41425;
+  color: #fff;
+  text-decoration: none;
+}
+/* Keep hover active while the sub-dropdown is open */
+.nav-dropdown > li:hover > a {
+  background: #a41425;
+  color: #fff;
+}
+
+/* ── Second-level sub-dropdown (fly-out right) ── */
+.nav-subdropdown {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 100%;
+  z-index: 10000;
+  min-width: 220px;
+  background: #fae2c1;
+  box-shadow: 3px 4px 16px rgba(0,0,0,0.15);
+}
+.nav-dropdown li:hover > .nav-subdropdown,
+.nav-dropdown li:focus-within > .nav-subdropdown {
+  display: block;
+}
+.nav-subdropdown a {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 15px;
+  color: #a41425;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(0,0,0,0.07);
+  white-space: nowrap;
+  text-decoration: none;
+}
+.nav-subdropdown a:hover {
   background: #a41425;
   color: #fff;
   text-decoration: none;
@@ -118,10 +206,19 @@
 /* ── Secondary links bar ── */
 .secondary-link-item {
   border-right: 2px solid #d31329;
-  transition: background 0.2s;
 }
 .secondary-link-item:last-child { border-right: none; }
-.secondary-link-item:hover { background: rgba(255,255,255,0.12); }
+
+.secondary-nav-link {
+  color: #fff;
+  background: transparent;
+  transition: color 0.2s ease-in-out, background 0.2s ease-in-out;
+}
+.secondary-nav-link:hover {
+  color: #f2d2a6 !important;
+  background: rgba(255,255,255,0.08);
+  text-decoration: none !important;
+}
 
 /* ── Virtual Tour tab ── */
 .virtual-tour-tab {
@@ -169,14 +266,37 @@
     position: static;
     box-shadow: none;
     border-top: none;
-    border-left: 3px solid #a41425;
+    border-left: 3px solid rgba(255,255,255,0.25);
     background: #8c0f1e;
   }
-  .nav-dropdown a {
+  .nav-dropdown > li > a {
     color: #fff;
-    border-bottom-color: rgba(255,255,255,0.1);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    background: transparent;
   }
-  .nav-dropdown a:hover {
+  .nav-dropdown > li > a:hover,
+  .nav-dropdown > li:hover > a {
     background: rgba(255,255,255,0.1);
+    color: #fff;
+  }
+  .nav-subdropdown {
+    position: static;
+    left: auto;
+    top: auto;
+    box-shadow: none;
+    background: #7a0c17;
+    border-left: 3px solid rgba(255,255,255,0.15);
+  }
+  .nav-subdropdown a {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: #fae2c1;
+    padding-left: 24px;
+    border-bottom-color: rgba(255,255,255,0.08);
+  }
+  .nav-subdropdown a:hover {
+    background: rgba(255,255,255,0.1);
+    color: #fff;
   }
 }

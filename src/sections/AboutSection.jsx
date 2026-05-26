@@ -2,7 +2,6 @@
 //   Left  (col ~65%) : college heading + paragraphs + "Read more" + Attention box
 //   Right (col ~35%) : Announcements panel
 
-import { useState } from 'react'
 import { aboutText, announcements } from '../data/homeData'
 
 function AnnouncementsPanel() {
@@ -37,41 +36,36 @@ function AnnouncementsPanel() {
 }
 
 function AttentionBox() {
-  const [logoFailed, setLogoFailed] = useState(false)
-
   return (
-    <div className="mt-5 border border-gray-200 bg-white shadow-sm p-5 text-center max-w-[580px]">
-      {/* Logo — wide 491×88 px image that already includes college name text */}
-      <div className="flex justify-center mb-3">
-        {!logoFailed ? (
-          <img
-            src="https://grcp.ac.in/images/logo.png"
-            alt="Gokaraju Rangaraju College of Pharmacy"
-            className="h-12 w-auto object-contain"
-            onError={() => setLogoFailed(true)}
-          />
-        ) : (
-          <div className="leading-tight">
-            <div className="text-[13px] font-bold" style={{ color: '#a41425' }}>
-              Gokaraju Rangaraju College of Pharmacy
-            </div>
-            <div className="text-[11px]" style={{ color: '#00883e' }}>
-              {/* Telugu script fallback */}
-              College of Pharmacy – GRCP
-            </div>
-          </div>
-        )}
+    <div className="mt-5 max-w-[580px]">
+      <img
+        src="https://grcp.ac.in/atten_grcp.png"
+        alt="GRCP Attention Notice — GRCP does not engage agents or consultants for admissions"
+        className="w-full h-auto border border-gray-200 shadow-sm"
+        onError={e => {
+          // Fallback to inline text if image fails to load
+          e.currentTarget.style.display = 'none'
+          e.currentTarget.nextSibling.style.display = 'block'
+        }}
+      />
+      {/* Fallback text — hidden unless image 404s */}
+      <div
+        style={{ display: 'none' }}
+        className="border border-gray-200 bg-white shadow-sm p-5 text-center"
+      >
+        <img
+          src="https://grcp.ac.in/images/logo.png"
+          alt="Gokaraju Rangaraju College of Pharmacy"
+          className="h-12 w-auto object-contain mx-auto mb-3"
+        />
+        <h4 className="text-[15px] font-black text-gray-900 mb-2">ATTENTION</h4>
+        <p className="text-[15px] font-medium leading-relaxed text-justify" style={{ color: '#383838' }}>
+          GRCP does not engage any agents or consultants for admissions to Category-B and NRI seats.
+          We strictly follow the Telangana State Council of Higher Education guidelines. If any
+          inconvenience in this regard, please contact <strong>7095271271</strong>.
+        </p>
+        <p className="text-[15px] font-bold mt-3" style={{ color: '#383838' }}>PRINCIPAL-GRCP</p>
       </div>
-
-      <h4 className="text-[15px] font-black text-gray-900 mb-2">ATTENTION</h4>
-
-      <p className="text-[15px] font-medium leading-relaxed text-justify" style={{ color: '#383838' }}>
-        GRCP does not engage any agents or consultants for admissions to Category-B and NRI seats.
-        We strictly follow the Telangana State Council of Higher Education guidelines. If any
-        inconvenience in this regard, please contact{' '}
-        <strong>7095271271</strong>.
-      </p>
-      <p className="text-[15px] font-bold mt-3" style={{ color: '#383838' }}>PRINCIPAL-GRCP</p>
     </div>
   )
 }

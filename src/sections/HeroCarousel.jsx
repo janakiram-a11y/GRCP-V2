@@ -33,7 +33,10 @@ export default function HeroCarousel() {
   }
 
   return (
-    <div className="relative w-full overflow-hidden" style={{ height: 'clamp(280px, 52vw, 520px)' }}>
+    /* Aspect-ratio wrapper: padding-bottom % sets height proportional to width.
+       38% ≈ 1320 × 0.38 = ~500 px at max container width — matches original.
+       All children are position:absolute so the padding-bottom drives the height. */
+    <div className="relative w-full bg-white overflow-hidden" style={{ paddingBottom: '38%' }}>
 
       {/* Slides */}
       {carouselSlides.map((slide, idx) => {
@@ -48,7 +51,13 @@ export default function HeroCarousel() {
               <img
                 src={slide.src}
                 alt={slide.alt}
-                className="w-full h-full object-cover"
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'contain',      // never crops — full image always visible
+                  objectPosition: 'center',
+                  display: 'block',
+                }}
                 onError={() => handleImgError(slide.id)}
               />
             ) : (
@@ -57,20 +66,11 @@ export default function HeroCarousel() {
                 className="w-full h-full flex flex-col items-center justify-center text-white"
                 style={{ background: FALLBACK_COLORS[idx % FALLBACK_COLORS.length] }}
               >
-                {/* logo.png is 491×88 — includes emblem + text; no extra h2 needed */}
                 <img
                   src="https://grcp.ac.in/images/logo.png"
                   alt="Gokaraju Rangaraju College of Pharmacy"
                   className="h-20 w-auto mb-5 opacity-95 drop-shadow-lg"
-                  onError={e => {
-                    e.currentTarget.style.display = 'none'
-                    // Show text fallback if logo also fails
-                    const parent = e.currentTarget.parentElement
-                    const fallback = document.createElement('h2')
-                    fallback.style.cssText = 'font-size:2rem;font-weight:700;text-align:center;font-family:"Times New Roman",serif'
-                    fallback.innerHTML = 'Gokaraju Rangaraju<br/>College of Pharmacy'
-                    parent.insertBefore(fallback, e.currentTarget.nextSibling)
-                  }}
+                  onError={e => { e.currentTarget.style.display = 'none' }}
                 />
                 <p className="text-base md:text-xl opacity-90 tracking-[0.2em] font-medium">
                   EXCELLENCE &nbsp;·&nbsp; INNOVATION &nbsp;·&nbsp; DEDICATION
@@ -100,7 +100,7 @@ export default function HeroCarousel() {
       </button>
 
       {/* Dot indicators */}
-      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 flex gap-2">
+      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 flex flex-wrap justify-center gap-1.5 px-12">
         {carouselSlides.map((_, idx) => (
           <button
             key={idx}
@@ -114,22 +114,6 @@ export default function HeroCarousel() {
           />
         ))}
       </div>
-
-      {/* Virtual Tour tab (right-edge vertical tab) */}
-      <a
-        href="#"
-        className="absolute right-0 top-1/2 -translate-y-1/2 z-10 flex items-center justify-center text-white font-bold text-[11px] tracking-widest cursor-pointer no-underline"
-        style={{
-          backgroundColor: '#00883e',
-          writingMode: 'vertical-rl',
-          textOrientation: 'mixed',
-          transform: 'translateY(-50%)',
-          padding: '16px 6px',
-          letterSpacing: '2px',
-        }}
-      >
-        VIRTUAL TOUR OF GRCP
-      </a>
 
     </div>
   )

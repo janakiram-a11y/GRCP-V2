@@ -1,6 +1,7 @@
 // SecondaryLinks — dark-navy bar below the carousel
 //   ALUMNI ASSOCIATION | MANDATORY DISCLOSURES | NIRF | EVENTS
 
+import { Link } from 'react-router-dom'
 import { secondaryLinks } from '../data/homeData'
 
 export default function SecondaryLinks() {
@@ -13,12 +14,13 @@ export default function SecondaryLinks() {
               key={idx}
               className="secondary-link-item flex-1 min-w-[120px]"
             >
-              <a
-                href={link.href}
-                className="flex items-center justify-center text-white text-[14.4px] font-semibold py-[5px] px-4 no-underline hover:bg-white/10 transition-colors text-center uppercase"
+              <Link
+                to={link.href}
+                className="secondary-nav-link flex items-center justify-center text-[14.4px] font-semibold py-[5px] px-4 text-center uppercase"
+                style={{ textDecoration: 'none' }}
               >
                 {link.label}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>

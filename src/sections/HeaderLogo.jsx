@@ -7,17 +7,17 @@
 import { useState } from 'react'
 
 const affiliationLogos = [
-  { name: 'CII',                       src: 'https://grcp.ac.in/images/cii.png' },
-  { name: "Innov. Council",            src: 'https://grcp.ac.in/images/iic.png' },
-  { name: 'NSS',                       src: 'https://grcp.ac.in/images/nss.png' },
-  { name: 'LSSDC',                     src: 'https://grcp.ac.in/images/lssdc.png' },
-  { name: 'GRES',                      src: 'https://grcp.ac.in/images/gres.png' },
-  { name: '22 Years\nExcellence',      src: 'https://grcp.ac.in/images/22years.png' },
-  { name: 'PCI',                       src: 'https://grcp.ac.in/images/pci.png' },
-  { name: 'Osmania\nUniversity',       src: 'https://grcp.ac.in/images/ou.png' },
-  { name: 'NBA\nB.Pharmacy',           src: 'https://grcp.ac.in/images/nba.png' },
-  { name: 'TASK',                      src: 'https://grcp.ac.in/images/task.png' },
-  { name: 'Unnat Bharat\nAbhiyan',     src: 'https://grcp.ac.in/images/uba.png' },
+  { name: 'CII',                            src: 'https://grcp.ac.in/images/affiliation/img1.jpg'      },
+  { name: "Institution's Innovation Council", src: 'https://grcp.ac.in/images/affiliation/img2.jpg?v=0.1' },
+  { name: 'NSS',                            src: 'https://grcp.ac.in/images/affiliation/img4.jpg'      },
+  { name: 'LSSDC',                          src: 'https://grcp.ac.in/images/affiliation/img5.jpg'      },
+  { name: 'GRES',                           src: 'https://grcp.ac.in/images/affiliation/img6.jpg'      },
+  { name: '22 Years of Excellence',         src: 'https://grcp.ac.in/images/affiliation/img7.jpg'      },
+  { name: 'PCI',                            src: 'https://grcp.ac.in/images/affiliation/img8.jpg'      },
+  { name: 'Osmania University',             src: 'https://grcp.ac.in/images/affiliation/img9.jpg'      },
+  { name: 'NBA – B.Pharmacy',              src: 'https://grcp.ac.in/images/affiliation/img10.jpg'     },
+  { name: 'TASK',                           src: 'https://grcp.ac.in/images/affiliation/img11.jpg'     },
+  { name: 'Unnat Bharat Abhiyan',           src: 'https://grcp.ac.in/images/affiliation/img12.jpg'     },
 ]
 
 // Duplicate so the marquee scrolls seamlessly

@@ -3,17 +3,14 @@
 // Pixel-close recreation of the original grcp.ac.in popup.
 
 import { useEffect, useCallback } from 'react'
-import { FaTimes } from 'react-icons/fa'
 
 export default function AntiRaggingModal({ onClose }) {
-  // Close on Escape key
   const handleKeyDown = useCallback(
     (e) => { if (e.key === 'Escape') onClose() },
     [onClose]
   )
   useEffect(() => {
     document.addEventListener('keydown', handleKeyDown)
-    // Prevent body scroll while modal is open
     document.body.style.overflow = 'hidden'
     return () => {
       document.removeEventListener('keydown', handleKeyDown)
@@ -25,53 +22,96 @@ export default function AntiRaggingModal({ onClose }) {
     /* ── Overlay ── */
     <div
       className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
-      style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}
-      onClick={onClose}               /* click outside → close */
+      style={{ backgroundColor: 'rgba(0,0,0,0.55)' }}
+      onClick={onClose}
       role="dialog"
       aria-modal="true"
       aria-labelledby="anti-ragging-title"
     >
       {/* ── Modal box ── */}
       <div
-        className="relative bg-white w-full max-w-[600px] max-h-[90vh] overflow-y-auto rounded-sm shadow-2xl"
-        style={{ border: '1px solid #ccc' }}
-        onClick={(e) => e.stopPropagation()}   /* prevent overlay close on inner click */
+        className="relative bg-white w-full max-w-[600px] max-h-[90vh] overflow-y-auto"
+        style={{
+          border: '3px solid #d31329',
+          borderRadius: '4px',
+          boxShadow: '0 4px 16px rgba(0,0,0,0.18)',
+        }}
+        onClick={(e) => e.stopPropagation()}
       >
-        {/* Close button */}
+        {/* Close button — plain × character, top-right */}
         <button
           onClick={onClose}
           aria-label="Close modal"
-          className="absolute top-3 right-3 z-10 text-gray-700 hover:text-black text-xl leading-none font-bold w-7 h-7 flex items-center justify-center hover:bg-gray-100 rounded transition-colors"
+          style={{
+            position: 'absolute',
+            top: '10px',
+            right: '14px',
+            fontSize: '22px',
+            fontWeight: '400',
+            lineHeight: 1,
+            color: '#555',
+            background: 'none',
+            border: 'none',
+            cursor: 'pointer',
+            padding: '0',
+            zIndex: 10,
+          }}
+          onMouseEnter={e => e.currentTarget.style.color = '#000'}
+          onMouseLeave={e => e.currentTarget.style.color = '#555'}
         >
-          <FaTimes className="text-[16px]" />
+          &#x00D7;
         </button>
 
         {/* Content */}
-        <div className="p-6 sm:p-8 pr-10 text-[15px] leading-relaxed" style={{ color: '#383838' }}>
+        <div
+          style={{
+            padding: '24px 28px 28px 28px',
+            fontFamily: 'Montserrat, sans-serif',
+            fontSize: '14px',
+            lineHeight: '1.6',
+            color: '#212529',
+          }}
+        >
 
           {/* ── Title block ── */}
           <h2
             id="anti-ragging-title"
-            className="text-[24px] font-bold mb-1 pr-4"
-            style={{ color: '#383838' }}
+            style={{
+              fontSize: '22px',
+              fontWeight: '700',
+              color: '#212529',
+              marginBottom: '4px',
+              paddingRight: '24px',
+              lineHeight: '1.3',
+            }}
           >
             National Ragging Prevention Programme
           </h2>
-          <p className="text-[15px] font-medium mb-4" style={{ color: '#383838' }}>National Anti-Ragging Helpline</p>
+          <p style={{ fontSize: '14px', fontWeight: '400', color: '#212529', marginBottom: '16px' }}>
+            National Anti-Ragging Helpline
+          </p>
 
           {/* ── Helpline number ── */}
-          <p className="text-[15px] font-medium mb-0.5" style={{ color: '#383838' }}>24X7 Toll Free</p>
-          <p className="font-bold text-[15px] mb-5" style={{ color: '#383838' }}>1800-180-5522</p>
+          <p style={{ fontSize: '14px', fontWeight: '400', color: '#212529', marginBottom: '2px' }}>
+            24X7 Toll Free
+          </p>
+          <p style={{ fontSize: '14px', fontWeight: '700', color: '#212529', marginBottom: '20px' }}>
+            1800-180-5522
+          </p>
 
           {/* ── UGC Monitoring Agency ── */}
-          <h3 className="text-[24px] font-medium mb-1" style={{ color: '#383838' }}>
+          <h3 style={{ fontSize: '20px', fontWeight: '400', color: '#212529', marginBottom: '4px', lineHeight: '1.3' }}>
             UGC Monitoring Agency
           </h3>
-          <p className="text-[15px] font-medium mb-1" style={{ color: '#383838' }}>Centre for Youth (C4Y)</p>
-          <p className="mb-5">
+          <p style={{ fontSize: '14px', fontWeight: '400', color: '#212529', marginBottom: '4px' }}>
+            Centre for Youth (C4Y)
+          </p>
+          <p style={{ marginBottom: '20px' }}>
             <a
               href="mailto:antiragging@c4yindia.org"
-              className="text-blue-600 hover:underline"
+              style={{ color: '#0d6efd', textDecoration: 'none' }}
+              onMouseEnter={e => e.currentTarget.style.textDecoration = 'underline'}
+              onMouseLeave={e => e.currentTarget.style.textDecoration = 'none'}
             >
               antiragging@c4yindia.org
             </a>
@@ -80,38 +120,51 @@ export default function AntiRaggingModal({ onClose }) {
               href="https://www.c4yindia.org"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-600 hover:underline"
+              style={{ color: '#0d6efd', textDecoration: 'none' }}
+              onMouseEnter={e => e.currentTarget.style.textDecoration = 'underline'}
+              onMouseLeave={e => e.currentTarget.style.textDecoration = 'none'}
             >
               www.c4yindia.org
             </a>
           </p>
 
           {/* ── Nodal officers ── */}
-          <p className="text-[15px] font-bold mb-3" style={{ color: '#383838' }}>
-            Contact Details of the Nodal Officers of Anti-Ragging Committee
-            and Squad
+          <p style={{ fontSize: '14px', fontWeight: '700', color: '#212529', marginBottom: '8px', lineHeight: '1.5' }}>
+            Contact Details of the Nodal Officers of Anti-Ragging Committee and Squad
           </p>
-          <p className="mb-5">
-            <a href="#" className="text-blue-600 hover:underline">
+          <p style={{ marginBottom: '20px' }}>
+            <a
+              href="#"
+              style={{ color: '#0d6efd', textDecoration: 'none' }}
+              onMouseEnter={e => e.currentTarget.style.textDecoration = 'underline'}
+              onMouseLeave={e => e.currentTarget.style.textDecoration = 'none'}
+            >
               Anti-Ragging Committee (ARC)
             </a>
             {' | '}
-            <a href="#" className="text-blue-600 hover:underline">
+            <a
+              href="#"
+              style={{ color: '#0d6efd', textDecoration: 'none' }}
+              onMouseEnter={e => e.currentTarget.style.textDecoration = 'underline'}
+              onMouseLeave={e => e.currentTarget.style.textDecoration = 'none'}
+            >
               Anti-Ragging Squad (ARS)
             </a>
           </p>
 
           {/* ── Warning ── */}
-          <p
-            className="text-[15px] font-bold mb-4 leading-snug"
-            style={{ color: '#a41425' }}
-          >
-            Ragging is a criminal offence and the culprits will attract
-            punitive action as mentioned in the UGC Regulations
+          <p style={{ fontSize: '14px', fontWeight: '700', color: '#d31329', marginBottom: '16px', lineHeight: '1.5' }}>
+            Ragging is a criminal offence and the culprits will attract punitive
+            action as mentioned in the UGC Regulations
           </p>
 
           {/* ── PDF link ── */}
-          <a href="#" className="text-blue-600 hover:underline text-[15px] font-medium">
+          <a
+            href="#"
+            style={{ color: '#0d6efd', fontSize: '14px', fontWeight: '400', textDecoration: 'none' }}
+            onMouseEnter={e => e.currentTarget.style.textDecoration = 'underline'}
+            onMouseLeave={e => e.currentTarget.style.textDecoration = 'none'}
+          >
             UGC Regulations PDF
           </a>
 
